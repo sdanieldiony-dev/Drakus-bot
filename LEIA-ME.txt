@@ -1,0 +1,34 @@
+DRAKUS + GROQCLOUD (IA gratis)
+
+ARQUIVOS (todos na raiz do repositorio, exceto chat.js):
+  index.html, netlify.toml, manifest.json, sw.js,
+  icon-192.png, icon-512.png, icon-maskable.png
+  netlify/functions/chat.js   <- este fica dentro das pastas netlify/functions
+
+PASSO A PASSO
+1. Chave: console.groq.com/keys > Create API Key. Copie (comeca com gsk_).
+   NUNCA cole a chave em chat, no index.html nem no GitHub.
+2. GitHub: crie um repositorio e envie os arquivos acima
+   (Add file > Upload files). O index.html precisa ter EXATAMENTE esse nome.
+3. Ainda no GitHub: Add file > Create new file, nome
+   netlify/functions/chat.js  (a barra cria as pastas) e cole o conteudo do chat.js.
+4. Netlify: Add new project > Import an existing project > GitHub > repositorio.
+   Deixe Build command e Publish directory vazios (ou ponto no publish).
+   Functions directory: netlify/functions
+5. Netlify > Environment variables > Add a variable:
+   Key:   GROQ_API_KEY
+   Value: sua chave gsk_...
+6. Deploys > Trigger deploy > Clear cache and deploy site.
+7. Teste a chave: abra no navegador
+   https://SEU-SITE.netlify.app/.netlify/functions/chat
+   Deve aparecer {"funcao":"ok","provedor":"groq","chaveConfigurada":true,"comecaComGsk":true}
+   - chaveConfigurada false: nome da variavel errado ou faltou o deploy do passo 6.
+   - comecaComGsk false: a chave colada esta errada.
+8. Abra o site no Chrome, permita o microfone e diga "ativar".
+
+TROCAR DE MODELO (opcional): variavel GROQ_MODEL no Netlify.
+Padrao: llama-3.3-70b-versatile (se atingir o limite usa llama-3.1-8b-instant).
+
+INSTALAR COMO APP (Android): Chrome > menu > Instalar app.
+
+Obs.: o Netlify Drop (arrastar pasta) nao e recomendado; use o GitHub.
